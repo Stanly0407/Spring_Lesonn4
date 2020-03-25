@@ -1,7 +1,9 @@
-package springles4;
+package springles4.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
+import springles4.entities.MusicPlayer;
+import springles4.entities.*;
 
 import java.util.Arrays;
 import java.util.List;

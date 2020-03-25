@@ -1,38 +1,57 @@
-package springles4;
+package springles4.entities;
 
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
+import springles4.entities.Music;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.List;
 import java.util.Random;
 
-public class MusicPlayer {
+public class MusicPlayer implements InitializingBean, DisposableBean {
 
     @Value("${musicPlayer.name}")
     private String name;
 
-    @Value("${musicPlayer.volume}")
-    private int volume;
+//    @Value("${musicPlayer.volume}")
+//    private int volume;
 
     private List<Music> musicList;
 
     public MusicPlayer(List<Music> musicList) {
         this.musicList = musicList;
     }
+
     public String getName() {
         return name;
     }
 
-    public int getVolume() {
-        return volume;
-    }
-
-    String volume1= Integer.toString(getVolume());
+//   public int getVolume() {
+//        return volume;
+//    }
 
     public String playMusic() {
         Random random = new Random();
-        return "Playing: " + musicList.get(random.nextInt(musicList.size())).getSong()
-                + " with volume " + this.volume1;
+        return "Playing: " + musicList.get(random.nextInt(musicList.size())).getSong();
     }
+
+ //   Для методов init и destroy через аннотации - закомментированы (м.б. любые названия методов).
+ //   Но здесь эти методы через интерфейс (конкретные методы интерфейса)
+ //   @PostConstruct
+ //   public void doMyInit() {
+ public void afterPropertiesSet() {
+        System.out.println("-----initialization-----");
+    }
+
+    // Для Prototype бинов не вызывается destroy-метод!
+ //   @PreDestroy
+  //  public void doMyDestroy() {
+    public void destroy() {
+        System.out.println("-----destruction-----");
+    }
+
 }
 
 

@@ -1,4 +1,4 @@
-package springles4;
+package springles4.entities;
 
 
 public class Computer {
